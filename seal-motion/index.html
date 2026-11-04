@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animal Motion Study — Seal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<main>
+  <header><span>INTERACTIVE WEB EXPERIMENT / 2026</span><span>STUDY 01 · SEAL</span></header>
+  <section><h1>ANIMAL MOTION STUDY</h1><p class="sub">An Exploration of Movement</p></section>
+
+  <!-- 넓은 영역 어디서든 누를 수 있어 움직이는 도형을 쫓을 필요가 없다 -->
+  <button class="stage" type="button" aria-label="누르고 있으면 압축되고 떼면 미끄러집니다" aria-describedby="hint">
+    <span class="runner" aria-hidden="true"><span class="facing"><span class="oval">
+      <!-- 뒤에서 앞으로: 머리, 앞지느러미, 꼬리 두 갈래, 몸통 -->
+      <i class="head"></i><i class="flipper"></i>
+      <i class="tail upper"></i><i class="tail lower"></i>
+      <i class="body-shape"></i>
+    </span></span></span>
+  </button>
+  <p id="hint" lang="ko">누르고 있다가 놓아보세요. <span>HOLD & RELEASE</span></p>
+  <footer>
+    <p>Exploring the rhythm, direction, and behavior of natural movement through geometric forms.</p>
+    <p>DEC 10, 2026<br>10:00 AM – 06:00 PM</p>
+    <p>DIGITAL ART EXHIBITION<br>Organized by MYONGJI UNIVERSITY</p>
+  </footer>
+</main>
+</body>
+</html>

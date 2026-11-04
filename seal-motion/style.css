@@ -1,0 +1,59 @@
+* { box-sizing:border-box; }
+body { margin:0; background:#3a89ff; color:#082950; font-family:Arial,sans-serif; }
+h1,p { margin:0; }
+main { min-height:100svh; display:grid; grid-template-rows:auto auto minmax(85px,1fr) auto auto;
+  gap:clamp(6px,1.2vh,18px); padding:clamp(14px,2.5vw,46px); }
+header,footer { display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
+header { font:600 clamp(9px,.8vw,14px) monospace; letter-spacing:.09em; }
+h1 { font-size:clamp(30px,min(5.2vw,8vh),100px); letter-spacing:-.065em; line-height:.98; }
+.sub { margin-top:5px; font:italic clamp(14px,1.35vw,25px) Georgia,serif; }
+.stage { position:relative; width:100%; overflow:hidden; border:0; background:transparent;
+  cursor:grab; user-select:none; touch-action:manipulation; container-type:size; }
+.stage:active { cursor:grabbing; }
+.stage:focus-visible { outline:2px dashed #082950; outline-offset:-3px; }
+#hint { text-align:center; font-size:12px; } #hint span { margin-left:6px; font:10px monospace; }
+footer { border-top:1px solid #08295060; padding-top:9px; font-size:clamp(10px,.9vw,16px); line-height:1.4; }
+footer p:first-child { max-width:39ch; } footer p:last-child { text-align:right; }
+/* 보이지 않는 세 겹: 이동, 진행 방향, 압축을 각자 담당 */
+.runner { position:absolute; left:50%; top:50%; translate:-50% -50%;
+  width:min(58vw,56vh); width:min(60cqw,103cqh); aspect-ratio:506/376; }
+.facing,.oval { display:block; position:relative; width:100%; height:100%; }
+.facing { transform:scaleX(var(--facing,1)); transition:transform .22s ease-in-out; }
+.oval { transform-origin:50% 65%; }
+/* 피그마 시안의 타원 5개. 겹친 부분은 맨 앞의 몸통이 가린다. */
+.oval i { position:absolute; display:block; border-radius:50%; background:#e4e4e4; }
+.head { left:.25%; top:0; width:43.5%; height:73%; transform:rotate(-7deg); }
+.flipper { left:29%; top:64%; width:46%; height:18%; --rest:55deg; transform:rotate(var(--rest)); }
+.tail { left:65.5%; width:37.5%; height:15%; }
+.upper { top:50%; --rest:-34deg; transform:rotate(var(--rest)); }
+.lower { top:51%; --rest:34deg; transform:rotate(var(--rest)); }
+.oval .body-shape { left:9.4%; top:22%; width:79.6%; height:65.7%; background:#e8e8e8; }
+
+.stroke .oval { animation:stroke var(--time) both; }
+@keyframes stroke {
+  0% {transform:var(--start);}
+  20% {transform:rotate(var(--lift)) scale(.91,1.045);}
+  35% {transform:rotate(2deg) scale(1.075,.945);}
+  78% {transform:rotate(var(--settle)) scale(.99,1.015);}
+  100% {transform:none;}
+}
+.stroke .flipper { animation:paddle var(--time) ease-in-out; }
+@keyframes paddle {
+  0%,100% {transform:rotate(55deg);}
+  20% {transform:rotate(69deg);}
+  46% {transform:rotate(39deg);}
+}
+.stroke .tail { animation:trail var(--time) ease-in-out; }
+@keyframes trail {
+  0%,25%,100% {transform:rotate(var(--rest));}
+  50% {transform:rotate(calc(var(--rest) - 5deg));}
+}
+@media(max-width:600px) {
+  footer {display:grid; grid-template-columns:1fr 1fr; gap:6px;}
+  footer p:first-child {grid-column:1/-1;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .facing {transition:none;}
+  .stroke .oval,.stroke .flipper,.stroke .tail {animation:none;}
+  .pressed .oval i {background:#cdd6df;}
+}
